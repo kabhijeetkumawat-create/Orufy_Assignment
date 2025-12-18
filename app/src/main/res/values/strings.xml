@@ -3,8 +3,10 @@
     <string name="history">History</string>
     <string name="Open">Open</string>
     <string name="Close">Close</string>
-    <string name="CV" >CV</string>
+    <string name="CV">CV</string>
     <string name="web_to_native">Web to Native</string>
     <string name="slider_image">Slider Image</string>
+    <string name="enter_url_e_g_google_com">Enter URL (e.g., google.com)</string>
+    <string name="enter_website_url">Enter Website URL</string>
 
 </resources>

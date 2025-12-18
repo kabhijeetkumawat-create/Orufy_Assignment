@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/appbar"
-            android:fitsSystemWindows="true"
             android:background="@color/Ocean">
 
             <com.google.android.material.appbar.MaterialToolbar
@@ -25,7 +24,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:id="@+id/topAppBar"
                 app:navigationIcon="@drawable/menu_icon"
-                android:background="@color/Ocean">
+                android:background="@color/white">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -34,52 +33,115 @@
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-
                     android:gravity="center"/>
 
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Main Content Area -->
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/appbar"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_below="@id/appbar">
 
-            <!-- Image Slider -->
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                android:layout_marginBottom="8dp">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/imageSlider"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- Dots Indicator -->
-            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                android:id="@+id/dotsIndicator"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                app:dotsColor="@color/Ocean"
-                app:dotsSize="8dp"
-                app:dotsSpacing="4dp"
-                app:selectedDotColor="@color/black" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <!-- Rest of your content -->
+                <!-- Image Slider -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp"
+                    android:layout_marginBottom="8dp">
 
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/imageSlider"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-        </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Dots Indicator -->
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/dotsIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    app:dotsColor="@color/Ocean"
+                    app:dotsSize="8dp"
+                    app:dotsSpacing="4dp"
+                    app:selectedDotColor="@color/black" />
+
+                <!-- URL Input Section -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp"
+                    android:layout_marginTop="8dp"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/enter_website_url"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="12dp"/>
+
+                        <!-- URL Input Field -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/urlInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/enter_url_e_g_google_com"
+                            app:boxStrokeColor="@color/Ocean"
+                            app:hintTextColor="@color/Ocean"
+                            app:endIconMode="clear_text"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/urlInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textUri"
+                                android:maxLines="1"
+                                android:imeOptions="actionGo"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/openButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Open"
+                            android:textSize="16sp"
+                            android:layout_marginTop="16dp"
+                            app:cornerRadius="8dp"
+                            android:backgroundTint="@color/Ocean"
+                            app:icon="@android:drawable/ic_menu_view"
+                            app:iconGravity="textStart"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </RelativeLayout>
 

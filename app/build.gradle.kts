@@ -42,6 +42,7 @@ dependencies {
 
         implementation("androidx.viewpager2:viewpager2:1.1.0")
         implementation("com.tbuonomo:dotsindicator:5.1.0")
+        implementation("com.google.code.gson:gson:2.13.2")
 
 
     implementation(libs.androidx.core.ktx)
