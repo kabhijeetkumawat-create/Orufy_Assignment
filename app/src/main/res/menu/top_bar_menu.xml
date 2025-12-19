@@ -10,10 +10,6 @@
             android:title="@string/history"
             android:icon="@drawable/history_icon"/>
 
-        <item
-            android:id="@+id/CV"
-            android:title="@string/CV"
-            android:icon="@drawable/cv_icon"/>
     </group>
 
 </menu>

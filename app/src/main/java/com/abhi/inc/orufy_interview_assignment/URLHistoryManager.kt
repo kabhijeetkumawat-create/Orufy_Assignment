@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.core.content.edit
 
 
 data class URLHistory(
@@ -35,7 +36,7 @@ class URLHistoryManager(context: Context) {
         }
 
         val json = gson.toJson(history)
-        sharedPreferences.edit().putString(KEY_HISTORY, json).apply()
+        sharedPreferences.edit { putString(KEY_HISTORY, json) }
     }
 
     fun getHistory(): List<URLHistory> {
@@ -46,6 +47,6 @@ class URLHistoryManager(context: Context) {
 
 
     fun clearHistory() {
-        sharedPreferences.edit().remove(KEY_HISTORY).apply()
+        sharedPreferences.edit { remove(KEY_HISTORY) }
     }
 }

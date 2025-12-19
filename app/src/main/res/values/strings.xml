@@ -8,5 +8,16 @@
     <string name="slider_image">Slider Image</string>
     <string name="enter_url_e_g_google_com">Enter URL (e.g., google.com)</string>
     <string name="enter_website_url">Enter Website URL</string>
+    <string name="load">load</string>
+    <string name="loading">Loading...</string>
+    <string name="close">Close</string>
+    <string name="clear_all">Clear All</string>
+    <string name="your_browsing_history_will_appear_here">Your browsing history will appear here</string>
+    <string name="no_history">No History</string>
+    <string name="upload">Upload</string>
+    <string name="todo">TODO</string>
+    <string name="https_www_google_com">https://www.google.com</string>
+    <string name="_2024_12_18_10_30_45">2024-12-18 10:30:45</string>
+    <string name="orufy_assignment">Orufy Assignment</string>
 
 </resources>

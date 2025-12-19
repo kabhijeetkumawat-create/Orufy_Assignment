@@ -1,10 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+
 }
 
 android {
     namespace = "com.abhi.inc.orufy_interview_assignment"
+
     compileSdk = 36
 
     defaultConfig {
@@ -26,25 +28,35 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+
+
+
     buildFeatures {
         viewBinding = true
     }
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
+kotlin {
+    jvmToolchain(11)
+}
+
 dependencies {
 
-        implementation("androidx.viewpager2:viewpager2:1.1.0")
-        implementation("com.tbuonomo:dotsindicator:5.1.0")
-        implementation("com.google.code.gson:gson:2.13.2")
-
-
+    implementation(libs.androidx.viewpager2)
+    implementation(libs.dotsindicator)
+    implementation(libs.gson)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

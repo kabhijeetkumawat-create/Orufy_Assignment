@@ -10,9 +10,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Orufy Assignment"
+        android:text="@string/orufy_assignment"
         android:textStyle="bold"
         android:textSize="30sp"
+        android:padding="5dp"
         android:textColor="@color/white"
         android:layout_gravity="center"
         android:gravity="center"/>

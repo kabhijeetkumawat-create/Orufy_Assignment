@@ -7,6 +7,7 @@ import android.os.Looper
 import android.util.Patterns
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
@@ -34,6 +35,30 @@ class MainActivity : AppCompatActivity() {
 
     private val sliderHandler = Handler(Looper.getMainLooper())
     private var currentPage = 0
+
+    // Activity Result Launcher for WebView
+    private val webViewLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val data = result.data
+
+            // Check if URL should be retained or cleared
+            val retainUrl = data?.getStringExtra(WebViewActivity.EXTRA_RETAIN_URL)
+            val clearUrl = data?.getBooleanExtra(WebViewActivity.EXTRA_CLEAR_URL, false) ?: false
+
+            when {
+                retainUrl != null -> {
+                    // Retain the URL in input field
+                    urlInput.setText(retainUrl)
+                }
+                clearUrl -> {
+                    // Clear the input field
+                    urlInput.text?.clear()
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,8 +102,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupImageSlider() {
         val images = listOf(
             R.drawable.electronics_banner,
-            R.drawable.facewash_banner,
-            R.drawable.food_banner
+            R.drawable.food_banner,
+            R.drawable.facewash_banner
         )
 
         val adapter = ImageSliderAdapter(images)
@@ -133,25 +158,19 @@ class MainActivity : AppCompatActivity() {
                     // Save to history
                     urlHistoryManager.saveURL(validURL)
 
-                    // Navigate to WebView
                     val intent = Intent(this, WebViewActivity::class.java)
-                    intent.putExtra("URL", validURL)
-                    startActivity(intent)
-
-                    // Clear input
-                    urlInput.text?.clear()
+                    intent.putExtra(WebViewActivity.EXTRA_URL, validURL)
+                    webViewLauncher.launch(intent)
                 }
             }
         }
 
-        // Clear error when user starts typing
         urlInput.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 urlInputLayout.error = null
             }
         }
 
-        // Handle IME action (when user presses "Go" on keyboard)
         urlInput.setOnEditorActionListener { _, _, _ ->
             openButton.performClick()
             true
@@ -159,12 +178,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isValidURL(url: String): Boolean {
-        // Check if it's a valid URL pattern
+        // Checks a valid URL pattern
         if (Patterns.WEB_URL.matcher(url).matches()) {
             return true
         }
 
-        // Check if it's a domain without scheme (e.g., google.com)
         val domainPattern = "^([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}(/.*)?$".toRegex()
         return domainPattern.matches(url)
     }
@@ -186,12 +204,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                     true
-                }
-                R.id.CV -> {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    true
-                }
-                else -> false
+                }else -> false
             }
         }
     }
